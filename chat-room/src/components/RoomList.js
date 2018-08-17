@@ -1,88 +1,66 @@
 import React, { Component } from 'react';
 
-
 class RoomList extends Component {
     constructor(props) {
-        super(props)
-//  store the list of rooms, so add an array of rooms on component state object
-
+        super(props);
         this.state = {
             rooms: [],
             newRoomName: '',
         };
-
-// store firebase reference to rooms path onto the this keyword
-
-this.roomsRef = this.props.firebase.database().ref('rooms');
-this.updateRooms = this.updateRooms.bind(this);
-this.handleChange = this.handleChange.bind(this);
-this.handleSubmit = this.handleSubmit.bind(this);
-
+        this.roomsRef = this.props.firebase.database().ref('rooms');
+        this.updateRooms = this.updateRooms.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    up
-
-    //  Add componentDidmount method / register child_added event
-    //  to this.roomRef
-
+    // UTILITY FNS AND EVENT HANDLERS
     componentDidMount() {
         this.updateRooms();
     }
-    updateRooms(){
+
+    updateRooms() {
         this.roomsRef.on('child_added', snapshot => {
             const room = snapshot.val();
             room.key = snapshot.key;
-            this.setState({ rooms: this.state.rooms.concat (room)});
+            // WHY DOESN'T push() WORK ON NEXT LINE???
+            this.setState({ rooms: this.state.rooms.concat(room) });
         });
     }
-<<<<<<< HEAD
-    render(){
-        // array map over state.rooms and return a div with room.name for each array item
-    
-        return( 
-            <div className="room-list">
-                <h1>welcome!</h1>
-                <div id="rooms">
-                    {this.state.rooms.map((room, index) => (
-                      <h2 key={index}>{room.name}</h2>  
-                    ))}
-                </div>
-            </div>
 
-            );
-        }
-=======
+    handleChange(ev) {
+        // update state (local)
+        this.setState({ newRoomName: ev.target.value });
+    }
 
-        handleChange(ev){
-            this.setState({ newRoomName: ev.target.value });
-        }
+    handleSubmit(ev) {
+        ev.preventDefault();
+        // update database (remote)
+        this.roomsRef.push().set({ name: this.state.newRoomName });
+    }
 
-        handleSubmit(ev) {
-            ev.preventdefault();
-            this.roomsRef.push().set({ name: this.state.newRooName });
-        }
-
-
-    render(){
-        // array map over state.rooms and return a div with room.name for each array item
+    render() {
         return (
             <div className="room-list">
-                <h2>Welcome!</h2>
+                <h1>Welcome!</h1>
                 <div id="rooms">
                     {this.state.rooms.map((room, index) => (
-                     <h2 key={index}>{room.name}</h2>   
+                        <h2 key={index}>{room.name}</h2>
                     ))}
                 </div>
-                <form  classname="room-form" onSubmit={e => this.handleSubmit(e)}>
-                    <input type="text"
+                <form
+                    className="room-form"
+                    onSubmit={e => this.handleSubmit(e)}
+                >
+                    <input
+                        type="text"
                         value={this.state.newRoomName}
                         onChange={e => this.handleChange(e)}
                     />
-                    <input type="submit" value="Create a new room" />
+                    <input type="submit" value="Add a new room" />
                 </form>
-            </div> 
+            </div>
         );
->>>>>>> chat-rooms
     }
+}
 
 export default RoomList;
