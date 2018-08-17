@@ -27,17 +27,19 @@ this.roomsRef = this.props.firebase.database().ref('rooms');
     }
     render(){
         // array map over state.rooms and return a div with room.name for each array item
-
-        let roomListRender = this.state.rooms.map((room) => {
-            return<div key={room.name}>
-                {room.name}
+    
+        return( 
+            <div className="room-list">
+                <h1>welcome!</h1>
+                <div id="rooms">
+                    {this.state.rooms.map((room, index) => (
+                      <h2 key={index}>{room.name}</h2>  
+                    ))}
+                </div>
             </div>
-        })
 
-        return (
-            <div>{roomListRender}</div>
-        )
+            );
+        }
     }
-}
 
 export default RoomList;
