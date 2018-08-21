@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MessageList from './MessageList';
 
 class RoomList extends Component {
     constructor(props) {
@@ -13,7 +14,6 @@ class RoomList extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    // UTILITY FNS AND EVENT HANDLERS
     componentDidMount() {
         this.updateRooms();
     }
@@ -22,7 +22,6 @@ class RoomList extends Component {
         this.roomsRef.on('child_added', snapshot => {
             const room = snapshot.val();
             room.key = snapshot.key;
-            // WHY DOESN'T push() WORK ON NEXT LINE???
             this.setState({ rooms: this.state.rooms.concat(room) });
         });
     }
@@ -49,8 +48,7 @@ class RoomList extends Component {
                 </div>
                 <form
                     className="room-form"
-                    onSubmit={e => this.handleSubmit(e)}
-                >
+                    onSubmit={e => this.handleSubmit(e)} >
                     <input
                         type="text"
                         value={this.state.newRoomName}
