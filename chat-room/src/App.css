@@ -1,3 +1,23 @@
+#main {
+  width:65%;
+  margin: 0 auto;
+}
+
+#sidebar {
+  float: left;
+  width: 35%;
+  height: 400px;
+  background-color: #219aeb;
+  overflow-x: hidden;
+}
+
+header {
+  margin: 0.1;
+}
+
+body {
+  background-color: #ffffff;
+}
 .App {
   text-align: center;
 }

@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import MessageList from './components/MessageList';
 import RoomList from './components/RoomList';
 import './App.css';
+import MessageList from './components/MessageList';
 
 
 
@@ -20,10 +21,36 @@ import './App.css';
 
 
 class App extends Component {
+  constructor(props){
+    super(props);
+
+    this.state={
+      activeRoom: ''
+    }
+    
+      this.changeActiveRoom = this.changeActiveRoom.bind(this);
+  }
+
+  changeActiveRoom(room) {
+    this.setState({ activeRoom: room })
+    console.log(this.state.activeRoom)
+  }
+
+
   render() {
     return (
       <div className="App">
-       <RoomList firebase={firebase} />
+      <main>
+      <section id="sidebar"> 
+       <RoomList firebase={firebase} 
+       activeRoom={this.state.activeRoom} changeActiveRoom={this.changeActiveRoom}/>
+       </section>
+       <section id="main">
+       <MessageList
+       firebase={firebase} 
+       activeRoom={this.state.activeRoom} />
+       </section>
+       </main>
       </div>
     );
   }

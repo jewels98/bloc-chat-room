@@ -6,19 +6,15 @@ class RoomList extends Component {
         super(props);
         this.state = {
             rooms: [],
-            newRoomName: '',
+            newRoomName: "",
         };
-        this.roomsRef = this.props.firebase.database().ref('rooms');
-        this.updateRooms = this.updateRooms.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.roomsRef = this.props.firebase.database().ref('rooms');
+    
     }
 
     componentDidMount() {
-        this.updateRooms();
-    }
-
-    updateRooms() {
         this.roomsRef.on('child_added', snapshot => {
             const room = snapshot.val();
             room.key = snapshot.key;
@@ -26,36 +22,38 @@ class RoomList extends Component {
         });
     }
 
-    handleChange(ev) {
-        // update state (local)
-        this.setState({ newRoomName: ev.target.value });
+    handleChange(e) {
+        this.setState({ newRoomName: e.target.value });
     }
 
-    handleSubmit(ev) {
-        ev.preventDefault();
-        // update database (remote)
-        this.roomsRef.push().set({ name: this.state.newRoomName });
+    handleSubmit(e) {
+        e.preventDefault();
+        if(!this.state.newRoomName) return
+        this.roomsRef.push().set({ name: this.state.newRoomName })
+        this.setState({ newRoomName: ''})
     }
 
     render() {
         return (
             <div className="room-list">
-                <h1>Welcome!</h1>
-                <div id="rooms">
-                    {this.state.rooms.map((room, index) => (
-                        <h2 key={index}>{room.name}</h2>
-                    ))}
+            <section>
+                <h1>Bloc's Chat Room!</h1>
+                {this.state.rooms.map((room, index)=>
+                <li key={room.key}>
+                    {room.name}
+                </li>
+                )}
+                </section>
+                <div id="new-room">
+                    <form onSubmit={ (e) => this.handleSubmit(e)} >
+                        <p>Create New Room</p>
+                        <label>
+                            Room Name:
+                            <input type="text" value={this.state.newRoomName} onChange={(e) => this.handleChange(e) }/>
+                        </label>
+                        <input type="submit" value="submit" />
+                    </form>
                 </div>
-                <form
-                    className="room-form"
-                    onSubmit={e => this.handleSubmit(e)} >
-                    <input
-                        type="text"
-                        value={this.state.newRoomName}
-                        onChange={e => this.handleChange(e)}
-                    />
-                    <input type="submit" value="Add a new room" />
-                </form>
             </div>
         );
     }
