@@ -3,7 +3,8 @@ import * as firebase from 'firebase';
 import MessageList from './components/MessageList';
 import RoomList from './components/RoomList';
 import './App.css';
-import MessageList from './components/MessageList';
+import User from './components/User';
+
 
 
 
@@ -25,15 +26,21 @@ class App extends Component {
     super(props);
 
     this.state={
-      activeRoom: ''
-    }
+      activeRoom: '',
+      activeUser: ''
+    };
     
-      this.changeActiveRoom = this.changeActiveRoom.bind(this);
+      this.setActiveRoom = this.setActiveRoom.bind(this);
+      this.setUser = this.setUser.bind(this);
   }
 
-  changeActiveRoom(room) {
+  setActiveRoom(room) {
     this.setState({ activeRoom: room })
     console.log(this.state.activeRoom)
+  }
+
+  setUser(user) {
+    this.setState({ activeUser: user });
   }
 
 
@@ -43,9 +50,13 @@ class App extends Component {
       <main>
       <section id="sidebar"> 
        <RoomList firebase={firebase} 
-       activeRoom={this.state.activeRoom} changeActiveRoom={this.changeActiveRoom}/>
+       activeRoom={this.state.activeRoom} setActiveRoom={this.setActiveRoom}/>
        </section>
        <section id="main">
+       <User
+          firebase={firebase}
+          setUser={this.setUser}
+          user={this.state.activeUser} />
        <MessageList
        firebase={firebase} 
        activeRoom={this.state.activeRoom} />

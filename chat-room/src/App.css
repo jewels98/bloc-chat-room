@@ -1,12 +1,14 @@
 #main {
   width:65%;
   margin: 0 auto;
+  padding: 15px;
 }
+
 
 #sidebar {
   float: left;
   width: 35%;
-  height: 400px;
+  height: 900px;
   background-color: #219aeb;
   overflow-x: hidden;
 }
