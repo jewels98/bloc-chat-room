@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SendMessageForm from './SendMessageForm';
 
+
 class User extends Component {
     constructor(props) {
         super(props);
@@ -31,7 +32,7 @@ class User extends Component {
                 this.setState({ loggedInUser: null });
             })
             .catch(err => {
-                alert('We were unable to sign you out.');
+                alert('Unable to sign you out.');
             });
     }
     render() {

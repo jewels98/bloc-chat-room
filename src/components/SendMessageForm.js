@@ -1,17 +1,3 @@
-// const SendMessageForm = info => {
-//     console.log(info);
-//     const firebase = info.firebase;
-//     const user = info.user ? info.user : {};
-//     console.log(firebase);
-//     console.log(user);
-//     return (
-//         <form>
-//             <input type="text" />
-//             <input type="submit" />
-//         </form>
-//     );
-// };
-
 import React, { Component } from 'react';
 
 class SendMessageForm extends Component {
