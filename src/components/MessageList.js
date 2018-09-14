@@ -16,6 +16,7 @@ class MessageList extends Component {
         this.updateMessages();
     }
 
+
     updateMessages() {
         this.messagesRef.on('child_added', snapshot => {
             const message = snapshot.val();
@@ -23,6 +24,7 @@ class MessageList extends Component {
             this.setState({ messages: this.state.messages.concat(message) });
         });
     }
+    
     render() {
         return (
             <div
