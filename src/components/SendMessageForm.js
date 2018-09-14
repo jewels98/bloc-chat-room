@@ -27,6 +27,7 @@ class SendMessageForm extends Component {
         });
     }
 
+    
     render() {
         const firebase = this.props.firebase;
         const user = this.props.user ? this.props.user : {};
