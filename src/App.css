@@ -1,28 +1,46 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,600');
+
+
+html {
+  background-image: url('./images/kendal-james-632196-unsplash.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+* {
+  list-style-type: none;
+  margin: 5px;
 }
 
 .App-title {
-  font-size: 1.5em;
+  padding-top: 20px;
+
+  color: #ffff;
+  font-family: 'Montserrat',
+  sans-serif;
 }
 
-.App-intro {
-  font-size: large;
+.room {
+  padding-left: 10px;
+  padding-top: 20px;
+  font-size: 0.6em;
+  font-family: 'Raleway',
+  sans-serif;
+  background-color: azure;
+  opacity: 0.80;
+  padding-top: 0.4em;
+  margin-top: 1.5em;
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.room-form {
+  padding-top: 10px;
+}
+
+#messages {
+  font-color: #ffff;
+  background-color: azure;
+  opacity: 0.80;
+  height: 300px;
 }

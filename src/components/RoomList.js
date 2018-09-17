@@ -91,12 +91,7 @@ class RoomList extends Component {
         return (
             <div
                 className="room-list"
-                style={{
-                    backgroundColor: 'darkred',
-                    color: 'black',
-                    flexGrow: 1,
-                    padding: 1 + 'em',
-                }}
+             
             >
                 <div id="rooms">
                     {this.state.rooms.map((room, index) => (
